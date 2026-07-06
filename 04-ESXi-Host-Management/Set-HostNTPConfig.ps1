@@ -11,7 +11,9 @@
 .EXAMPLE
     PS> ./Set-HostNTPConfig.ps1 -NtpServer 10.0.0.1,10.0.0.2 -VMHost "esxi0*"
 .NOTES
-    Author : Tayfun Deger | github.com/tayfundeger
+    Author  : Tayfun Deger
+    Website : https://www.tayfundeger.com
+    GitHub  : https://github.com/tayfundeger
     Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
 #>
 [CmdletBinding(SupportsShouldProcess)]
