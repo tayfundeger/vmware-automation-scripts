@@ -10,6 +10,9 @@ Every script is standalone, documented with PowerShell **comment-based help**
 guards against running without an active vCenter connection. Scripts that change
 state support **`-WhatIf`** so you can preview before applying.
 
+> **Looking for detailed articles, guides and explanations for these scripts?**  
+> Visit **[www.tayfundeger.com](https://www.tayfundeger.com)**.
+
 ---
 
 ## Requirements
@@ -227,4 +230,9 @@ Each folder has its own `README.md` describing the scripts it contains.
 
 ## Author
 
-**Tayfun Deger** — [github.com/tayfundeger](https://github.com/tayfundeger)
+**Tayfun Deger**
+
+For detailed articles and write-ups about these scripts, visit **[www.tayfundeger.com](https://www.tayfundeger.com)**.
+
+- Website: [www.tayfundeger.com](https://www.tayfundeger.com)
+- GitHub: [github.com/tayfundeger](https://github.com/tayfundeger)
