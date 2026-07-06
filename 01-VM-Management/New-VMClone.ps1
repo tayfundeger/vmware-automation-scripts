@@ -15,7 +15,9 @@
 .EXAMPLE
     PS> ./New-VMClone.ps1 -SourceVM app01 -NewName app01-copy -VMHost esxi02 -Datastore DS02
 .NOTES
-    Author : Tayfun Deger | github.com/tayfundeger
+    Author  : Tayfun Deger
+    Website : https://www.tayfundeger.com
+    GitHub  : https://github.com/tayfundeger
     Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
 #>
 [CmdletBinding(SupportsShouldProcess)]

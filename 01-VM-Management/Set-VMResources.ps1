@@ -15,7 +15,9 @@
 .EXAMPLE
     PS> ./Set-VMResources.ps1 -Name db01 -NumCpu 8 -MemoryGB 32
 .NOTES
-    Author : Tayfun Deger | github.com/tayfundeger
+    Author  : Tayfun Deger
+    Website : https://www.tayfundeger.com
+    GitHub  : https://github.com/tayfundeger
     Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
 #>
 [CmdletBinding(SupportsShouldProcess)]

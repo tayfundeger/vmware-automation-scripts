@@ -8,7 +8,9 @@
 .EXAMPLE
     PS> ./Restart-VMGuest.ps1 -Name app01,app02
 .NOTES
-    Author : Tayfun Deger | github.com/tayfundeger
+    Author  : Tayfun Deger
+    Website : https://www.tayfundeger.com
+    GitHub  : https://github.com/tayfundeger
     Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
 #>
 [CmdletBinding(SupportsShouldProcess)]

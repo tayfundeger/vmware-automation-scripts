@@ -19,7 +19,9 @@
 .EXAMPLE
     PS> ./New-VMFromTemplate.ps1 -Name web01 -Template W2022-Tpl -Datastore DS01 -VMHost esxi01
 .NOTES
-    Author : Tayfun Deger | github.com/tayfundeger
+    Author  : Tayfun Deger
+    Website : https://www.tayfundeger.com
+    GitHub  : https://github.com/tayfundeger
     Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
 #>
 [CmdletBinding(SupportsShouldProcess)]

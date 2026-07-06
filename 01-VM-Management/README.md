@@ -31,4 +31,6 @@ Connect-VIServer -Server vcenter.example.com
 
 ---
 
-Part of the [VMware PowerCLI Automation Scripts](../README.md) collection by **Tayfun Deger** ([github.com/tayfundeger](https://github.com/tayfundeger)).
+Part of the [VMware PowerCLI Automation Scripts](../README.md) collection by **Tayfun Deger**.
+
+For detailed articles about these scripts, visit **[www.tayfundeger.com](https://www.tayfundeger.com)** · [github.com/tayfundeger](https://github.com/tayfundeger)
