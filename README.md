@@ -1,9 +1,11 @@
 # VMware PowerCLI Automation Scripts
 
-A curated collection of **100 production-ready VMware PowerCLI scripts** covering the
+A curated collection of **200 production-ready VMware PowerCLI scripts** covering the
 tasks a virtualization administrator runs most often: VM lifecycle, snapshots,
-storage, ESXi hosts, networking, clusters (DRS/HA), performance, security and
-inventory (resource pools, folders, templates, tags).
+storage, ESXi hosts, networking, clusters (DRS/HA), performance, security,
+inventory, vCenter administration, backup/export, vMotion & migration, advanced
+VM operations, alarms/events/logging, capacity planning, advanced storage
+(iSCSI/NFS/VMFS) and bulk automation.
 
 Every script is standalone, documented with PowerShell **comment-based help**
 (`Get-Help ./Script.ps1 -Full`), returns objects you can pipe or export to CSV, and
@@ -200,21 +202,165 @@ state support **`-WhatIf`** so you can preview before applying.
 | `Get-CustomAttributes.ps1` | Custom attribute definitions and VM values. |
 | `Get-VMFolderPath.ps1` | Full inventory folder path per VM. |
 
+### 10 · vCenter & Inventory
+| Script | Description |
+|---|---|
+| `Get-VCenterInfo.ps1` | vCenter version, build, API and instance UUID. |
+| `Get-VISession.ps1` | Active vCenter sessions (user, IP, last active). |
+| `Get-VILicense.ps1` | License products, editions and used vs. total capacity. |
+| `Get-RecentTasks.ps1` | Recent tasks with state and initiating user (-FailedOnly). |
+| `Get-VIEventReport.ps1` | Events over the last N days (optional text filter). |
+| `Get-DatacenterInventory.ps1` | Cluster/host/VM/datastore counts per datacenter. |
+| `Get-OrphanedVMs.ps1` | Orphaned, inaccessible or invalid VMs. |
+| `Find-VMByIP.ps1` | Locate the VM owning a given guest IP. |
+| `Find-VMByMAC.ps1` | Locate the VM owning a given MAC address. |
+| `Get-VMHostInMaintenance.ps1` | Hosts currently in maintenance mode. |
+| `Get-VIRoleUsage.ps1` | Roles cross-referenced with permission assignments. |
+| `Stop-IdleVISession.ps1` | Terminate idle vCenter sessions (-WhatIf). |
+
+### 11 · Backup, Export & Configuration
+| Script | Description |
+|---|---|
+| `Export-VMConfig.ps1` | Export each VM's configuration to JSON. |
+| `Export-VMToOVF.ps1` | Export VM(s) to OVF/OVA (-WhatIf). |
+| `Export-HostConfig.ps1` | Export host NTP/syslog/DNS/services to JSON. |
+| `Export-PortGroupConfig.ps1` | Standard port groups + security policy to CSV. |
+| `Export-DRSRuleConfig.ps1` | DRS rules and member VMs to CSV. |
+| `Export-ResourcePoolConfig.ps1` | Resource pool shares/reservations/limits to CSV. |
+| `Export-TagConfig.ps1` | Tag definitions and assignments to CSV. |
+| `Export-RoleConfig.ps1` | Custom roles and their privileges to JSON. |
+| `Backup-VDSwitchConfig.ps1` | Native VDS backup zip per distributed switch (-WhatIf). |
+| `Export-VMAnnotations.ps1` | VM notes and custom attribute values to CSV. |
+
+### 12 · vMotion & Migration
+| Script | Description |
+|---|---|
+| `Move-VMDatastore.ps1` | Storage vMotion a VM (optional disk format) (-WhatIf). |
+| `Move-VMToDatastoreCluster.ps1` | Storage vMotion into an SDRS cluster (-WhatIf). |
+| `Invoke-HostEvacuation.ps1` | vMotion all powered-on VMs off a host (-WhatIf). |
+| `Invoke-DatastoreEvacuation.ps1` | Storage vMotion all VMs off a datastore (-WhatIf). |
+| `Move-VMsBulkByCSV.ps1` | CSV-driven bulk compute/storage migration (-WhatIf). |
+| `Move-VMToCluster.ps1` | Migrate a VM to another cluster (-WhatIf). |
+| `Move-VMToResourcePool.ps1` | Move a VM into a resource pool (-WhatIf). |
+| `Move-VMToFolder.ps1` | Move a VM to another inventory folder (-WhatIf). |
+| `Get-VMotionHistory.ps1` | Recent vMotion/migration events. |
+| `Get-DRSRecommendations.ps1` | List or apply pending DRS recommendations (-WhatIf). |
+
+### 13 · Advanced VM Operations
+| Script | Description |
+|---|---|
+| `Update-VMHardwareVersion.ps1` | Upgrade VM hardware/compatibility version (-WhatIf). |
+| `New-VMHardDisk.ps1` | Add a virtual disk (size/format/datastore) (-WhatIf). |
+| `Remove-VMHardDisk.ps1` | Detach a disk, optionally delete files (-WhatIf). |
+| `Expand-VMHardDisk.ps1` | Grow a virtual disk (-WhatIf). |
+| `New-VMNetworkAdapter.ps1` | Add a NIC on a port group (-WhatIf). |
+| `Remove-VMNetworkAdapter.ps1` | Remove a NIC (-WhatIf). |
+| `Set-VMCDDrive.ps1` | Mount an ISO or disconnect media (-WhatIf). |
+| `Get-VMGuestDiskUsage.ps1` | Guest filesystem capacity/free (needs Tools). |
+| `Set-VMBootOptions.ps1` | Set boot delay / enter firmware setup (-WhatIf). |
+| `Set-VMAdvancedSetting.ps1` | Set a VM advanced (extraConfig) key (-WhatIf). |
+| `Invoke-VMGuestCommand.ps1` | Run a command in the guest via Tools (-WhatIf). |
+| `Copy-FileToGuest.ps1` | Upload a file into the guest via Tools (-WhatIf). |
+| `Update-VMTools.ps1` | Upgrade VMware Tools, optional -NoReboot (-WhatIf). |
+| `Set-VMResourceLimits.ps1` | Set CPU/memory reservations, limits, shares (-WhatIf). |
+
+### 14 · Alarms, Events & Logging
+| Script | Description |
+|---|---|
+| `Get-AlarmDefinitions.ps1` | All alarm definitions (-DisabledOnly). |
+| `Get-TriggeredAlarms.ps1` | Currently triggered alarms across the inventory. |
+| `Set-AlarmState.ps1` | Enable or disable an alarm definition (-WhatIf). |
+| `Get-AlarmActionReport.ps1` | Which alarms have email/SNMP/script actions. |
+| `Get-LoginEvents.ps1` | User login/logout session events. |
+| `Get-VMPowerEvents.ps1` | VM power on/off/suspend events. |
+| `Get-HostEvents.ps1` | Host connectivity/maintenance/hardware events. |
+| `Get-PermissionChangeEvents.ps1` | Permission add/remove/update audit trail. |
+| `Get-ConfigChangeEvents.ps1` | VM reconfiguration audit events. |
+| `Export-EventLog.ps1` | Export events over N days to CSV. |
+
+### 15 · Reporting & Capacity Planning
+| Script | Description |
+|---|---|
+| `Get-IdleVMs.ps1` | Low CPU + network VMs (decommission candidates). |
+| `Get-OversizedVMs.ps1` | Under-utilized VMs (downsize candidates). |
+| `Get-UndersizedVMs.ps1` | Over-utilized VMs (upsize candidates). |
+| `Get-PoweredOffVMs.ps1` | Powered-off VMs and reclaimable space. |
+| `Get-VMDensityPerHost.ps1` | VM density and vCPU:pCPU / vRAM:pRAM per host. |
+| `Get-CPUOvercommitment.ps1` | vCPU:pCPU overcommitment per cluster. |
+| `Get-MemoryOvercommitment.ps1` | vRAM:pRAM overcommitment per cluster. |
+| `Get-ClusterConsolidationRatio.ps1` | VMs-per-host per cluster. |
+| `Get-VMRightsizingReport.ps1` | CPU/mem avg+peak with rightsizing recommendation. |
+| `Get-TopProvisionedVMs.ps1` | Largest VMs by provisioned storage. |
+| `Get-GuestOSReport.ps1` | VM count by guest OS. |
+| `Get-VMHardwareVersionReport.ps1` | VM count by hardware version. |
+| `Get-ResourceReservationReport.ps1` | VMs with reservations or limits set. |
+| `Get-EmptyResourcePools.ps1` | Resource pools with no VMs. |
+
+### 16 · Storage Advanced
+| Script | Description |
+|---|---|
+| `New-NFSDatastore.ps1` | Mount an NFS datastore on hosts (-WhatIf). |
+| `New-VMFSDatastore.ps1` | Create a VMFS datastore on a LUN (-WhatIf). |
+| `Remove-DatastoreSafely.ps1` | Remove a datastore only if empty (-WhatIf). |
+| `Get-StorageAdapters.ps1` | HBAs per host (type/model/driver/status). |
+| `Update-StorageAdapterRescan.ps1` | Rescan all HBAs + VMFS (-WhatIf). |
+| `Get-iSCSIConfiguration.ps1` | iSCSI adapter IQN and configured targets. |
+| `New-iSCSITarget.ps1` | Add a send/static iSCSI target (-WhatIf). |
+| `Get-VMFSVersion.ps1` | VMFS major version per datastore. |
+| `Get-DatastoreLUNMapping.ps1` | VMFS datastore to backing LUN canonical name. |
+| `Get-ScsiDeviceInfo.ps1` | Disk LUNs per host (vendor/model/capacity). |
+| `Get-StoragePathState.ps1` | Path state per LUN, detect dead paths (-DeadOnly). |
+| `Get-VMFSProperties.ps1` | VMFS version, block size, UUID, capacity. |
+
+### 17 · Host Configuration Advanced
+| Script | Description |
+|---|---|
+| `Get-HostFirewallRules.ps1` | ESXi firewall rulesets per host (-EnabledOnly). |
+| `Set-HostFirewallRule.ps1` | Enable/disable a firewall ruleset (-WhatIf). |
+| `Get-HostPowerPolicy.ps1` | CPU power management policy per host. |
+| `Set-HostPowerPolicy.ps1` | Set power policy (High Perf/Balanced/Low) (-WhatIf). |
+| `Get-HostScratchConfig.ps1` | Current vs. configured scratch location. |
+| `Get-HostCoreDumpConfig.ps1` | Core dump partition and network collector. |
+| `Get-HostKernelModules.ps1` | Loaded VMkernel modules via esxcli. |
+| `Add-HostToCluster.ps1` | Join an ESXi host to a cluster (-WhatIf). |
+| `Remove-HostFromCluster.ps1` | Safely remove a host from inventory (-WhatIf). |
+| `Restart-VMHostSafely.ps1` | Reboot a host, maintenance-guarded (-WhatIf). |
+| `Set-HostShellTimeout.ps1` | Set ESXi shell/SSH idle timeouts (-WhatIf). |
+| `Get-HostBootDevice.ps1` | Boot filesystem UUID and boot NIC. |
+
+### 18 · Automation Utilities & Bulk Operations
+| Script | Description |
+|---|---|
+| `Connect-MultipleVCenters.ps1` | Connect to several vCenters at once. |
+| `New-VMsFromCSV.ps1` | Bulk-deploy VMs from a template via CSV (-WhatIf). |
+| `Set-VMAttributesFromCSV.ps1` | Bulk-set notes/custom attributes via CSV (-WhatIf). |
+| `Invoke-SnapshotFromCSV.ps1` | Bulk-create snapshots from a CSV list (-WhatIf). |
+| `Export-FullInventory.ps1` | Export VMs/Hosts/Datastores/Clusters to CSVs. |
+| `Send-VIReportEmail.ps1` | Email a plain-text vSphere health summary (-WhatIf). |
 ---
 
 ## Repository layout
 
 ```
 vmware-automation-scripts/
-├── 01-VM-Management/            (15 scripts)
-├── 02-Snapshot-Management/      (10 scripts)
-├── 03-Datastore-Storage/        (12 scripts)
-├── 04-ESXi-Host-Management/     (13 scripts)
-├── 05-Networking/               (10 scripts)
-├── 06-Cluster-DRS-HA/           (10 scripts)
-├── 07-Performance-Monitoring/   (12 scripts)
-├── 08-Security-Compliance/      (10 scripts)
-└── 09-ResourcePools-Folders-Tags/ (8 scripts)
+├── 01-VM-Management/               (15 scripts)
+├── 02-Snapshot-Management/         (10 scripts)
+├── 03-Datastore-Storage/           (12 scripts)
+├── 04-ESXi-Host-Management/        (13 scripts)
+├── 05-Networking/                  (10 scripts)
+├── 06-Cluster-DRS-HA/              (10 scripts)
+├── 07-Performance-Monitoring/      (12 scripts)
+├── 08-Security-Compliance/         (10 scripts)
+├── 09-ResourcePools-Folders-Tags/   (8 scripts)
+├── 10-vCenter-Inventory/           (12 scripts)
+├── 11-Backup-Export-Config/        (10 scripts)
+├── 12-vMotion-Migration/           (10 scripts)
+├── 13-Advanced-VM-Operations/      (14 scripts)
+├── 14-Alarms-Events-Logging/       (10 scripts)
+├── 15-Reporting-Capacity/          (14 scripts)
+├── 16-Storage-Advanced/            (12 scripts)
+├── 17-Host-Config-Advanced/        (12 scripts)
+└── 18-Automation-Utilities/         (6 scripts)
 ```
 
 Each folder has its own `README.md` describing the scripts it contains.
