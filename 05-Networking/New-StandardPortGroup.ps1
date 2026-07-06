@@ -15,7 +15,9 @@
 .EXAMPLE
     PS> ./New-StandardPortGroup.ps1 -VMHost esxi01 -VirtualSwitch vSwitch0 -Name APP-VLAN20 -VLanId 20
 .NOTES
-    Author : Tayfun Deger | github.com/tayfundeger
+    Author  : Tayfun Deger
+    Website : https://www.tayfundeger.com
+    GitHub  : https://github.com/tayfundeger
     Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
 #>
 [CmdletBinding(SupportsShouldProcess)]
