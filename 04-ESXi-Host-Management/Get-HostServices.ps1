@@ -1,0 +1,24 @@
+<#
+.SYNOPSIS
+    Reports the status of ESXi host services.
+.DESCRIPTION
+    Lists services (SSH, ESXi Shell, NTP, etc.) per host with running state and
+    startup policy.
+.PARAMETER VMHost
+    Optional host name filter (wildcards allowed).
+.EXAMPLE
+    PS> ./Get-HostServices.ps1
+.NOTES
+    Author : Tayfun Deger | github.com/tayfundeger
+    Requires: VMware PowerCLI 12+ and an active Connect-VIServer session.
+#>
+[CmdletBinding()]
+param([string]$VMHost = '*')
+
+if (-not $global:DefaultVIServer) { Write-Warning 'No active vCenter connection. Run Connect-VIServer first.'; return }
+
+Get-VMHost -Name $VMHost | Sort-Object Name | ForEach-Object {
+    $h = $_
+    Get-VMHostService -VMHost $h | Select-Object `
+        @{N='VMHost';E={$h.Name}}, Key, Label, Running, Policy
+}
